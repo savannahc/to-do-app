@@ -16,14 +16,26 @@ window.onload = function() {
       // create a new input
       let checkbox = document.createElement('input');
 
+      //create delete button
+      let deleteButton = document.createElement('submit');
+
       // set the input's type to checkbox
       checkbox.type = "checkbox";
+
+      //set the input's type to submit
+      deleteButton.type = "input";
+
+      //set the input's text to delete
+      deleteButton.content = "Delete";
 
       // set the title
       newLi.textContent = title;
 
       // attach the checkbox to the li
       newLi.appendChild(checkbox);
+
+      //attach the delete button to the li
+      newLi.appendChild(deleteButton);
 
       // attach the li to the ul
       toDoList.appendChild(newLi);
