@@ -1,50 +1,60 @@
-function onReady(){
+function onReady() {
+  let id = 0;
+  const toDos = [];
   const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
 
-  addToDoForm.addEventListener('submit', () => {
-    event.preventDefault();
+  function createNewToDo() {
+    const newToDoText = document.getElementById('newToDoText');
+    if (!newToDoText.value) {
+      return;
+    }
 
-    // get the text
-    let title = newToDoText.value;
+    toDos.push({
+      title: newToDoText.value,
+      complete: false,
+      id: id.value
+    });
 
-    // create a new li
-    let newLi = document.createElement('li');
+    id++;
 
-    // create a new input
-    let checkbox = document.createElement('input');
-
-    checkbox.type = "checkbox";
-
-    // create a ability to delete item
-    let minusBtn = document.createElement('button');
-    minusBtn.innerHTML = '<span>Delete</span>';
-
-    // set the title
-    newLi.textContent = title;
-
-    // attach the checkbox to the li
-    newLi.appendChild(checkbox);
-
-    // attach the checkbox to the li
-    newLi.appendChild(minusBtn);
-
-    // attach the li to the ul
-    toDoList.appendChild(newLi);
-
-    // empty the input value
     newToDoText.value = '';
 
-    // listening for minusBtn to be clicked and removing the item
-    minusBtn.addEventListener('click', function() {
-      newLi.parentNode.removeChild(newLi);
-    })
-
-    console.log(title);
+    renderTheUI();
+  }
+  addToDoForm.addEventListener('submit', event => {
+    event.preventDefault();
+    createNewToDo();
   });
 
-};
+  function renderTheUI() {
+    const toDoList = document.getElementById('toDoList');
+
+    toDoList.textContent = '';
+
+    toDos.forEach(function(toDo) {
+      const newLi = document.createElement('li');
+      const checkbox = document.createElement('input');
+      const deleteButton = document.createElement('input');
+      checkbox.type = "checkbox";
+      deleteButton.type = "submit";
+
+      newLi.textContent = toDo.title;
+
+      toDoList.appendChild(newLi);
+      newLi.appendChild(checkbox);
+      newLi.appendChild(deleteButton);
+    });
+
+//this is the part I am stuggling with, I have a feeling it has to do with id and .value
+    deleteButton.addEventListener('submit', event => {
+      event.preventDefault();
+      toDos.filter(toDo.id === toDos.id);
+      renderTheUI();
+    });
+  }
+}
+
+
 
 window.onload = function() {
   onReady();
