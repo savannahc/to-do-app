@@ -12,7 +12,7 @@ function onReady() {
     toDos.push({
       title: newToDoText.value,
       complete: false,
-      id: id.value
+      id: id
     });
 
     id++;
@@ -38,6 +38,8 @@ function onReady() {
       checkbox.type = "checkbox";
       deleteButton.type = "submit";
 
+      deleteButton.value = 'Delete';
+
       newLi.textContent = toDo.title;
 
       toDoList.appendChild(newLi);
@@ -45,16 +47,21 @@ function onReady() {
       newLi.appendChild(deleteButton);
     });
 
-//this is the part I am stuggling with, I have a feeling it has to do with id and .value
     deleteButton.addEventListener('submit', event => {
       event.preventDefault();
-      toDos.filter(toDo.id === toDos.id);
+
+      function seeId() {
+        return toDos.id === id;
+      }
+
+      function deleteLi() {
+        toDos = toDos.filter(seeId);
+      }
       renderTheUI();
+
     });
   }
 }
-
-
 
 window.onload = function() {
   onReady();
