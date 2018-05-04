@@ -1,2 +1,2 @@
 # to-do-app
-Simple to-do app that includes adding and deletion functionality. 
+Simple to-do list app that lets users add and delete items. Uses material design library for styling.
